@@ -9,15 +9,16 @@
           <article class="gallery-wrap">
             <div class="img-big-wrap">
               <div>
-                <a href="#"
-                  ><img src="/media/{{product.product_images.first.image}}"
-                /></a>
+                <a href="#"><img src="/media/{{selected_img.image}}" /></a>
               </div>
             </div>
             <!-- slider-product.// -->
             <div class="thumbs-wrap">
               {% for image in product.product_images.all %}
-              <a href="#" class="item-thumb">
+              <a
+                onClick="select_img('{{image.uid}}','{{selected_size}}')"
+                class="item-thumb"
+              >
                 <img src="/media/{{image.image}}"
               /></a>
 
@@ -82,7 +83,7 @@
                     class="custom-control custom-radio custom-control-inline"
                   >
                     <input type="radio"
-                    onChange="get_correct_price('{{size.size}}')"
+                    onChange="get_correct_price('{{size.size}}','{{selected_img.uid}}')"
                     name="select_size" {% if selected_size == size.size%}
                     checked {% endif %} class="custom-control-input" />
                     <div class="custom-control-label">{{size.size}}</div>
@@ -117,8 +118,18 @@
 </section>
 
 <script>
-  function get_correct_price(size) {
-    window.location.href = window.location.pathname + `?size=${size}`;
+  function get_correct_price(size, img_uid) {
+    window.location.href =
+      window.location.pathname + `?size=${size}&img=${img_uid}`;
+  }
+
+  function select_img(img_uid, selected_size) {
+    if (selected_size !== "") {
+      window.location.href =
+        window.location.pathname + `?size=${selected_size}&img=${img_uid}`;
+    } else {
+      window.location.href = window.location.pathname + `?img=${img_uid}`;
+    }
   }
 </script>
 
