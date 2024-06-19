@@ -98,10 +98,12 @@
                 </div>
                 <div class="widget-header icontext">
                   {% if user.first_name %}
-                  <img
-                    src="/media/{{user.profile.profile_image}}"
-                    class="icon icon-sm rounded-circle border"
-                  />
+                  <a href="{% url 'profile' %}">
+                    <img
+                      src="/media/{{user.profile.profile_image}}"
+                      class="icon icon-sm rounded-circle border"
+                    />
+                  </a>
                   {% else %}
                   <div class="icon icon-sm rounded-circle border">
                     <i class="fa fa-user"></i>

@@ -50,14 +50,28 @@ def register_page(request):
     user_obj.set_password(password)
     user_obj.save()
 
-    messages.success(request, 'An email has been sent on your mail')
-    return HttpResponseRedirect(request.path_info)
+    login(request, user_obj)
+    return redirect('/')
 
   return render(request, 'accounts/register.html')
 
 def logout_page(request):
   logout(request)
   return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def profile(request):
+  orders = Cart.objects.filter(user_id = request.user.id, is_paid = True).order_by('-created_at')
+  context = {
+    'orders':orders
+  }
+  return render(request,'accounts/profile.html', context)
+
+def order_detail(request, order_uid):
+  order = Cart.objects.get(uid = order_uid)
+  context = {
+    'order':order
+  }
+  return render(request,'accounts/order-detail.html', context)
 
 def activate_email(request, email_token):
   try:
@@ -100,7 +114,7 @@ def cart(request):
      
   payment = None
 
-  if cart:
+  if cart and cart.get_total()>0:
     client = razorpay.Client(auth = (settings.RAZOR_PAY_KEY_ID, settings.RAZOR_PAY_KEY_SECRET))
     payment = client.order.create({'amount': cart.get_total()*100, 'currency': 'INR', 'payment_capture':1})
 
@@ -109,8 +123,7 @@ def cart(request):
   
   context = {
     'cart': cart,
-    'payment': payment,
-    'user':request.user
+    'payment': payment
   }
   return render(request, 'accounts/cart.html', context)
 
@@ -151,4 +164,4 @@ def success(request):
   cart = Cart.objects.get(razor_pay_order_id = order_id)
   cart.is_paid = True
   cart.save()
-  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+  return redirect('/accounts/cart')

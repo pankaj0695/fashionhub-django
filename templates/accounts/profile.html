@@ -1,0 +1,61 @@
+{% extends "base/base.html" %} {% block start %}
+<head>
+  <link rel="stylesheet" href="/media/css/profile.css" />
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-header">
+      <img
+        src="/media/{{user.profile.profile_image}}"
+        alt="User Image"
+        class="profile-image"
+      />
+      <div class="user-info">
+        <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+        <p>{{ user.email }}</p>
+      </div>
+    </div>
+    <div class="order-history">
+      <h2>Order History</h2>
+      {% if orders %}
+      <table class="table table-borderless table-shopping-cart">
+        <thead class="text-muted">
+          <tr class="small text-uppercase">
+            <th scope="col">Order Id</th>
+            <th scope="col" width="120">Date</th>
+            <th scope="col" width="120">Total</th>
+            <th scope="col" width="80">Status</th>
+            <th scope="col" class="text-right" width="200"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders%}
+          <tr>
+            <td>{{order.razor_pay_order_id}}</td>
+            <td>
+              <div>{{ order.created_at|date:"SHORT_DATETIME_FORMAT" }}</div>
+            </td>
+            <td>
+              <div class="price-wrap">
+                <var class="price">&#8377;{{order.get_total}}.00</var>
+              </div>
+              <!-- price-wrap .// -->
+            </td>
+            <td>{{order.status}}</td>
+            <td class="text-right">
+              <a href="{% url 'order_detail' order.uid%}" class="btn btn-light">
+                View Details</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>No previous orders found.</p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+
+{% endblock %}

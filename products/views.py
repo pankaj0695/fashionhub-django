@@ -8,7 +8,6 @@ def product(request, slug):
     print(product_images[0].image)
     context = {
       'product':product,
-      'user':request.user,
       'selected_size': '',
       'selected_img': product_images[0],
       'updated_price': None

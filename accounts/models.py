@@ -9,7 +9,7 @@ from products.models import Product, ColorVariant, SizeVariant, Coupon
 
 class Profile(BaseModel):
   user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-  is_email_verified = models.BooleanField(default=False)
+  is_email_verified = models.BooleanField(default=True)
   email_token = models.CharField(max_length=100, null=True, blank=True)
   profile_image = models.ImageField(upload_to='profile')
 
@@ -24,6 +24,7 @@ class Cart(BaseModel):
   coupon = models.ForeignKey(Coupon, on_delete=models.SET_NULL, null=True, blank=True)
   is_paid = models.BooleanField(default=False)
   razor_pay_order_id = models.CharField(max_length=100, null=True, blank=True)
+  status = models.CharField(max_length=100, default='Pending')
   
   def __str__(self) -> str:
     return self.user.first_name
@@ -47,6 +48,7 @@ class Cart(BaseModel):
 class CartItem(BaseModel):
   cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')
   product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
+  quantity = models.IntegerField(default=1)
   color_variant = models.ForeignKey(ColorVariant, on_delete=models.SET_NULL, null=True, blank=True)
   size_variant = models.ForeignKey(SizeVariant, on_delete=models.SET_NULL, null=True, blank=True)
   

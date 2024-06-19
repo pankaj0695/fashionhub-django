@@ -1,0 +1,67 @@
+{% extends "base/base.html" %} {% block start %}
+<head>
+  <link rel="stylesheet" href="/media/css/order-detail.css" />
+</head>
+<body>
+  <div class="order-detail-container">
+    <div class="order-summary">
+      <h1>Order Details</h1>
+      <p><strong>Order ID:</strong> {{ order.razor_pay_order_id }}</p>
+      <p>
+        <strong>Date:</strong> {{order.created_at|date:"SHORT_DATETIME_FORMAT"}}
+      </p>
+      <p><strong>Total Price:</strong> &#8377;{{ order.get_total }}</p>
+      <p><strong>Status:</strong> {{ order.status }}</p>
+    </div>
+    <div class="ordered-items">
+      <h2>Ordered Items</h2>
+      <table class="table table-borderless table-shopping-cart">
+        <thead class="text-muted">
+          <tr class="small text-uppercase">
+            <th scope="col">Product</th>
+            <th scope="col" width="120">Quantity</th>
+            <th scope="col" width="120">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cart_item in order.cart_items.all%}
+          <tr>
+            <td>
+              <figure class="itemside">
+                <div class="aside">
+                  <img
+                    src="/media/{{cart_item.product.product_images.first.image }}"
+                    class="img-sm"
+                  />
+                </div>
+
+                <figcaption class="info">
+                  <a href="" class="title text-dark"
+                    >{{cart_item.product.product_name}}</a
+                  >
+                  {% if cart_item.size_variant %}
+                  <p class="text-muted small">
+                    Size: {{cart_item.size_variant.size}}
+                  </p>
+                  {% endif %}
+                </figcaption>
+              </figure>
+            </td>
+            <td>
+              <div>{{cart_item.quantity}}</div>
+            </td>
+            <td>
+              <div class="price-wrap">
+                <var class="price"
+                  >&#8377;{{cart_item.get_product_price}}.00</var
+                >
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+{% endblock %}
