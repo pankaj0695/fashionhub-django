@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %} {% block start %}
+{% extends 'base/base.html' %} {% load static %}{% block start %}
 <section class="section-content padding-y">
   <div class="container">
     <div class="row">
@@ -20,7 +20,7 @@
                   <figure class="itemside">
                     <div class="aside">
                       <img
-                        src="/media/{{cart_item.product.product_images.first.image }}"
+                        src="{% static '' %}{{cart_item.product.product_images.first.image }}"
                         class="img-sm"
                       />
                     </div>
@@ -133,7 +133,7 @@
             </dl>
             <hr />
             <p class="text-center mb-3">
-              <img src="/media/images/misc/payments.png" height="26" />
+              <img src="{% static 'images/misc/payments.png' %}" height="26" />
             </p>
           </div>
           <!-- card-body.// -->
@@ -154,7 +154,7 @@
     currency: "INR",
     name: "FashionHub",
     description: "Checkout",
-    image: "/media/images/fashionhub.png",
+    image: "{% static 'images/fashionhub.png' %}",
     order_id: "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     handler: function (response) {
       window.location.href = `http://localhost:8000/accounts/success?order_id={{payment.id}}`;

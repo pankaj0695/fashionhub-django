@@ -1,4 +1,4 @@
-{% extends "base/base.html"%} {% block start %}
+{% extends "base/base.html"%} {% load static %} {% block start %}
 
 <div class="container mt-5 pt-5">
   <div class="row">
@@ -7,7 +7,7 @@
       <figure class="card card-product-grid">
         <a href="{% url 'product' product.slug %}">
           <div class="img-wrap">
-            <img src="/media/{{product.product_images.first.image}}" />
+            <img src="{% static '' %}{{product.product_images.first.image}}" />
           </div>
           <figcaption class="info-wrap border-top">
             <a href="{% url 'product' product.slug %}" class="title">

@@ -1,6 +1,6 @@
-{% extends "base/base.html" %} {% block start %}
+{% extends "base/base.html" %} {% load static %}{% block start %}
 <head>
-  <link rel="stylesheet" href="/media/css/order-detail.css" />
+  <link rel="stylesheet" href="{% static 'css/order-detail.css' %}" />
 </head>
 <body>
   <div class="order-detail-container">
@@ -30,7 +30,7 @@
               <figure class="itemside">
                 <div class="aside">
                   <img
-                    src="/media/{{cart_item.product.product_images.first.image }}"
+                    src="{% static '' %}{{cart_item.product.product_images.first.image }}"
                     class="img-sm"
                   />
                 </div>

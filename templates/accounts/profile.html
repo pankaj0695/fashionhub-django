@@ -1,12 +1,12 @@
-{% extends "base/base.html" %} {% block start %}
+{% extends "base/base.html" %}{% load static %} {% block start %}
 <head>
-  <link rel="stylesheet" href="/media/css/profile.css" />
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
 </head>
 <body>
   <div class="profile-container">
     <div class="profile-header">
       <img
-        src="/media/{{user.profile.profile_image}}"
+        src="{% static '' %}{{user.profile.profile_image}}"
         alt="User Image"
         class="profile-image"
       />

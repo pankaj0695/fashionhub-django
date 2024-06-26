@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'accounts',
-    'home'
+    'home',
+    'storages',
 ]    
 
 MIDDLEWARE = [
@@ -146,3 +147,19 @@ EMAIL_HOST_PASSWORD = 'Pankaj@#011'
 
 RAZOR_PAY_KEY_ID = "rzp_test_iWhMDUNVzE8e8a"
 RAZOR_PAY_KEY_SECRET = "gzpxo4q114jofUbt4nQZMxDe"
+
+AWS_ACCESS_KEY_ID = 'AKIAU6GDX5BKNKCYGMEG'
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_STORAGE_BUCKET_NAME = 'fashionhub-bkt'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_FILE_OVERWRITE = False
+
+STORAGES = {
+  "default": {
+    "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+  },
+  "staticfiles": {
+    "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+  },
+}

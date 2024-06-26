@@ -1,4 +1,4 @@
-{% extends "base/base.html"%} {% block start %}
+{% extends "base/base.html"%} {% load static %}{% block start %}
 
 <section class="section-content padding-y bg">
   <div class="container">
@@ -9,7 +9,9 @@
           <article class="gallery-wrap">
             <div class="img-big-wrap">
               <div>
-                <a href="#"><img src="/media/{{selected_img.image}}" /></a>
+                <a href="#"
+                  ><img src="{% static '' %}{{selected_img.image}}"
+                /></a>
               </div>
             </div>
             <!-- slider-product.// -->
@@ -19,7 +21,7 @@
                 onClick="select_img('{{image.uid}}','{{selected_size}}')"
                 class="item-thumb"
               >
-                <img src="/media/{{image.image}}"
+                <img src="{% static '' %}{{image.image}}"
               /></a>
 
               {% endfor %}
