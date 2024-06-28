@@ -157,7 +157,7 @@
     image: "{% static 'images/fashionhub.png' %}",
     order_id: "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     handler: function (response) {
-      window.location.href = `http://localhost:8000/accounts/success?order_id={{payment.id}}`;
+      window.location.href = `https://fashionhub-yty8.onrender.com/accounts/success?order_id={{payment.id}}`;
     },
     theme: {
       color: "#3399cc",
