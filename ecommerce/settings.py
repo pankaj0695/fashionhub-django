@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -146,10 +147,10 @@ EMAIL_HOST_USER = 'pankajgupta0695@gmail.com'
 EMAIL_HOST_PASSWORD = 'Pankaj@#011'
 
 RAZOR_PAY_KEY_ID = "rzp_test_iWhMDUNVzE8e8a"
-RAZOR_PAY_KEY_SECRET = "gzpxo4q114jofUbt4nQZMxDe"
+RAZOR_PAY_KEY_SECRET = config('RAZOR_PAY_KEY_SECRET')
 
-AWS_ACCESS_KEY_ID = 'AKIAU6GDX5BKNKCYGMEG'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 
 AWS_STORAGE_BUCKET_NAME = 'fashionhub-bkt'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
