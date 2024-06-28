@@ -89,7 +89,7 @@ DATABASES = {
 '''
 
 DATABASES = {
-    'default': dj_database_url.parse(config('EXTERNAL_DATABASE_URL'))
+    'default': dj_database_url.parse(config('DATABASE_URL'))
 }
 
 
