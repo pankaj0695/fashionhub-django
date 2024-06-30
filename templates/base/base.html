@@ -73,7 +73,7 @@
               </div>
               <!-- brand-wrap.// -->
             </div>
-            <div class="col-lg-6 col-sm-12">
+            <div class="col-lg-6 col-sm-12 search-bar">
               <form method="POST" class="search">
                 {% csrf_token %}
                 <div class="input-group w-100">
@@ -114,16 +114,21 @@
                     />
                   </a>
                   {% else %}
-                  <div class="icon icon-sm rounded-circle border">
+                  <div
+                    class="icon icon-sm rounded-circle border hide-on-mobile"
+                  >
                     <i class="fa fa-user"></i>
                   </div>
                   {% endif %}
                   <div class="text">
                     {% if user.first_name %}
-                    <span class="text-muted">Welcome, {{user.first_name}}</span>
+                    <span class="text-muted"
+                      ><span class="hide-on-mobile">Welcome, </span
+                      >{{user.first_name}}</span
+                    >
                     <div><a href="{% url 'logout'%}">Logout</a></div>
                     {% else %}
-                    <span class="text-muted">Welcome!</span>
+                    <span class="text-muted hide-on-mobile">Welcome!</span>
                     <div>
                       <a href="{% url 'login'%}">Login</a> |
                       <a href="{% url 'register'%}">SignUp</a>
